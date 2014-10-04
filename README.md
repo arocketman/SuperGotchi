@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Supergotchi is a remake of the old "Tamagotchi" in Java, supporting advanced features and moving it toward a "gotchi" life simulator.
 
 Some ideas:
@@ -16,3 +17,9 @@ Future ideas:
 
 2d implementation.
 Networking to interact with other players.
+=======
+SuperGotchi
+===========
+
+An enhanced tamagotchi leaning toward a life simulator.
+>>>>>>> 1ffec7508bd76935d760421869b7f64147492430
