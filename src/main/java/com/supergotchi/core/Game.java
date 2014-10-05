@@ -32,7 +32,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!command.equalsIgnoreCase("exit")){
-            System.out.println("Insert a command: list , interact");
+            System.out.println("Insert a command: list , interact, save");
             command = scanner.next();
             if(command.startsWith("inter")) handleInteraction(scanner);
             else if(command.startsWith("list")) handleList(scanner);
