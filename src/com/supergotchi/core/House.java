@@ -20,6 +20,7 @@ public class House {
         this.furnitures.add(new Bed("Cheap bed",1000,10));
     }
 
+    /** Prints all of the furniture in the house **/
     public void printFurnitureList(){
         int counter = 0;
         for(Furniture f : furnitures){

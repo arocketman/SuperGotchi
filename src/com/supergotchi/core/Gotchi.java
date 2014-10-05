@@ -18,7 +18,7 @@ public class Gotchi {
 
     public Gotchi(String name) {
         Name = name;
-        Stats = new Stat[]{new Energy(), new Hunger()};
+        Stats = new Stat[]{new Energy(), new Hunger(), new Bladder()};
         happiness = BASE_HAPPINESS;
         coins = BASE_COINS;
         Home = new House();
