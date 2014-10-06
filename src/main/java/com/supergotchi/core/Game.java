@@ -1,15 +1,22 @@
 package com.supergotchi.core;
 
+
 import java.util.Scanner;
+import java.util.Timer;
 
 /**
  * Created by Andrea on 04/10/2014.
  */
 public class Game {
     Gotchi gotchi;
+    StatsChanger statsChanger;
+    Timer timer;
 
     public Game(Gotchi gotchi){
         this.gotchi = gotchi;
+        this.statsChanger = new StatsChanger(gotchi);
+        timer = new Timer(true);
+        timer.scheduleAtFixedRate(this.statsChanger,5000,10 * 1000);
     }
 
     public void handleInteraction(Scanner scanner){
@@ -32,11 +39,12 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!command.equalsIgnoreCase("exit")){
-            System.out.println("Insert a command: list , interact, save");
+            System.out.println("Insert a command: list , interact, stats, save . ");
             command = scanner.next();
             if(command.startsWith("inter")) handleInteraction(scanner);
             else if(command.startsWith("list")) handleList(scanner);
             else if(command.startsWith("exit")) handleExit();
+            else if(command.startsWith("stats")) System.out.println(gotchi.getStatList());
             else if(command.startsWith("save")) SaveLoadUtilities.saveGotchi(this.gotchi);
             else{
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");

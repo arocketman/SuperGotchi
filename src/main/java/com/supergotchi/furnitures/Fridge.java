@@ -9,7 +9,7 @@ import com.supergotchi.core.Gotchi;
 public class Fridge extends Furniture {
 
     public Fridge(String name, int cost, int modifier) {
-        super(name, cost, modifier, "hunger");
+        super(name, cost, modifier, "Satiation");
     }
 
     @Override

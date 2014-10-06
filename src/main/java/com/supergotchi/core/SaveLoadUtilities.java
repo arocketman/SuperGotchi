@@ -45,9 +45,7 @@ public class SaveLoadUtilities {
             e.printStackTrace();
         }
 
-        Gotchi loadedGotchi = gson.fromJson(json,Gotchi.class);
-        System.out.println("hi");
-        return loadedGotchi;
+        return gson.fromJson(json,Gotchi.class);
     }
 
     /**

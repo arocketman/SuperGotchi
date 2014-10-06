@@ -41,4 +41,9 @@ public abstract class Stat {
     public void setValue(double value) {
         Value = value;
     }
+
+    public void decreaseValue(double value){
+        this.Value -= value;
+        if(this.Value <= 0) this.Value = 0;
+    }
 }
