@@ -1,5 +1,7 @@
 package com.supergotchi.statsTraits;
 
+import com.supergotchi.core.Gotchi;
+
 /**
  * Created by Andrea on 04/10/2014.
  */
@@ -20,7 +22,10 @@ public abstract class Stat {
         DeathChanceModifier = deathChanceModifier;
     }
 
+    /**What happens when the stat is really low and needs attention.*/
     public abstract String notifyMessage();
+    /**What happens when the stat reaches 0.*/
+    public abstract void statReachesZero(Gotchi gotchi);
 
     public String getName() {
         return Name;

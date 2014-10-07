@@ -24,6 +24,7 @@ public class StatsChanger extends TimerTask{
             stat.decreaseValue((new Random()).nextInt(5) + 1);
             if(stat.getValue() == 0){
                 System.out.println("Your gotchi is in critical condition!!! This is caused by low " + stat.getName());
+
                 gotchi.decreaseHappiness((int)(BASE_MODIFIER_HAPPINESS * stat.getHappinessModifier()));
                 if(gotchi.isUnhappy()) System.out.println("Your gotchi is unhappy :(");
             }
