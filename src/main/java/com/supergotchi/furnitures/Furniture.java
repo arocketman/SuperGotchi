@@ -1,12 +1,13 @@
 package com.supergotchi.furnitures;
 
 import com.supergotchi.core.Gotchi;
+import com.supergotchi.moneySystem.Buyable;
 import com.supergotchi.statsTraits.Stat;
 
 /**
  * Created by Andrea Capuano on 04/10/2014.
  */
-public abstract class Furniture {
+public abstract class Furniture implements Buyable {
     //Fields
     String Name;
     int Cost;
@@ -42,7 +43,23 @@ public abstract class Furniture {
         }
     }
 
+    @Override
     public String getName() {
         return Name;
+    }
+
+    @Override
+    public int getCost() {
+        return this.Cost;
+    }
+
+    @Override
+    public void setCost(int price) {
+        this.Cost = price;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.Name = name;
     }
 }

@@ -20,5 +20,5 @@ public class Satiation extends Stat {
     public void statReachesZero(Gotchi gotchi) {
         System.out.println("Your gotchi is starving to death!!!");
         //Todo: Increment deathChance.. a lot! The guy is starving to death!
-    }
 }
+        }

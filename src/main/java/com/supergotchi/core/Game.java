@@ -1,6 +1,8 @@
 package com.supergotchi.core;
 
 
+import com.supergotchi.moneySystem.Shops;
+
 import java.util.Scanner;
 import java.util.Timer;
 
@@ -35,17 +37,22 @@ public class Game {
         System.out.println("Have a good one.");
     }
 
+    public void handleShop(){
+        Shops.printShops();
+    }
+
     public void gameLoop(){
         Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!command.equalsIgnoreCase("exit")){
-            System.out.println("Insert a command: list , interact, stats, save . ");
+            System.out.println("Insert a command: list , interact, stats, save, shop . ");
             command = scanner.next();
             if(command.startsWith("inter")) handleInteraction(scanner);
             else if(command.startsWith("list")) handleList(scanner);
             else if(command.startsWith("exit")) handleExit();
             else if(command.startsWith("stats")) System.out.println(gotchi.getStatList());
             else if(command.startsWith("save")) SaveLoadUtilities.saveGotchi(this.gotchi);
+            else if(command.startsWith("shop")) handleShop();
             else{
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");
             }
