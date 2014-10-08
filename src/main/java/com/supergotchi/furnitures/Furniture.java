@@ -37,7 +37,7 @@ public abstract class Furniture implements Buyable {
         Stat stat = gotchi.getStat(ModifiedStat);
         if(stat.getValue() >= 100) System.out.println(cantUseThisMessage());
         else {
-            stat.setValue(stat.getValue() + Modifier);
+            stat.addValue(Modifier);
             System.out.println(usedMessage());
             System.out.println(stat.getName() + " new value: " + stat.getValue());
         }
@@ -61,5 +61,12 @@ public abstract class Furniture implements Buyable {
     @Override
     public void setName(String name) {
         this.Name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Name : " + Name + ", " +
+               "Price : " + Cost + ", " +
+               "Efficiency: " + String.valueOf(Modifier) ;
     }
 }

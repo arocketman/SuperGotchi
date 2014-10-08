@@ -1,5 +1,6 @@
 package com.supergotchi.moneySystem;
 
+import com.supergotchi.core.Gotchi;
 import com.supergotchi.furnitures.Bed;
 import com.supergotchi.furnitures.Furniture;
 
@@ -17,6 +18,7 @@ public class FurnitureShop implements Shop {
     public FurnitureShop(String shopName) {
         this.name = shopName;
         this.furnituresForSale = new ArrayList<Furniture>();
+        fillBuyableList();
     }
 
 
@@ -32,6 +34,43 @@ public class FurnitureShop implements Shop {
 
     @Override
     public void fillBuyableList() {
-        this.furnituresForSale.add(new Bed("Cheap bed",1000,10));
+        this.furnituresForSale.add(new Bed("Cheap bed",1000,30));
+        this.furnituresForSale.add(new Bed("Comfy bed",3000,50));
+        this.furnituresForSale.add(new Bed("Great bed",1000,70));
+        this.furnituresForSale.add(new Bed("Royal bed",1000,100));
     }
+
+    @Override
+    public void buy(int buyableID, Gotchi gotchi) {
+        if(buyableID >= this.furnituresForSale.size()){
+            System.out.println("We do not have that furniture around here, maybe you can check somewhere else.");
+            return;
+        }
+        else{
+            Furniture boughtFurniture = this.furnituresForSale.get(buyableID);
+            if(gotchi.getCoins() < boughtFurniture.getCost()){
+                System.out.println("You do not have enough money! You require : " + boughtFurniture.getName() + " coins");
+                return;
+            }
+            //Let's do the transaction.
+            gotchi.decreaseMoney(boughtFurniture.getCost());
+            gotchi.getHome().addFurniture(boughtFurniture);
+            System.out.println("Congratulations you just bought : " + boughtFurniture.getName() + " for : " + boughtFurniture.getCost() + " coins. You now have: " + gotchi.getCoins());
+        }
+    }
+
+    @Override
+    public void printBuyablesList() {
+        for(int i = 0; i < furnituresForSale.size(); i++){
+            System.out.println("ID: " + i + " ->" + furnituresForSale.get(i).toString());
+        }
+    }
+
+    @Override
+    public void welcomeString() {
+        System.out.println("Welcome to : " + name.toString() + " , we have the very best furniture in GotchiTown. Here are our merchandise: ");
+        printBuyablesList();
+    }
+
+
 }

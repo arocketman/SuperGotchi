@@ -32,4 +32,8 @@ public class House {
     public Furniture getFurniture(int id){
         return furnitures.get(id);
     }
+
+    public void addFurniture(Furniture boughtFurniture) {
+        this.furnitures.add(boughtFurniture);
+    }
 }

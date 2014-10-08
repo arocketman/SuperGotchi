@@ -90,4 +90,8 @@ public class Gotchi {
         }
         return statsString;
     }
+
+    public void decreaseMoney(int amount){
+        this.coins -= amount;
+    }
 }

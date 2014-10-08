@@ -19,4 +19,8 @@ public class Shops {
             System.out.println("["+i+"] " + shops.get(i).getName() );
         }
     }
+
+    public static Shop getShop(int ID){
+        return shops.get(ID);
+    }
 }

@@ -51,4 +51,9 @@ public abstract class Stat {
         this.Value -= value;
         if(this.Value <= 0) this.Value = 0;
     }
+
+    public void addValue(int modifier){
+        this.Value += modifier;
+        if(this.Value > 100) this.Value = 100;
+    }
 }
