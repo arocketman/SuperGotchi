@@ -36,8 +36,8 @@ public class FurnitureShop implements Shop {
     public void fillBuyableList() {
         this.furnituresForSale.add(new Bed("Cheap bed",1000,30));
         this.furnituresForSale.add(new Bed("Comfy bed",3000,50));
-        this.furnituresForSale.add(new Bed("Great bed",1000,70));
-        this.furnituresForSale.add(new Bed("Royal bed",1000,100));
+        this.furnituresForSale.add(new Bed("Great bed",5000,70));
+        this.furnituresForSale.add(new Bed("Royal bed",10000,100));
     }
 
     @Override
@@ -48,14 +48,15 @@ public class FurnitureShop implements Shop {
         }
         else{
             Furniture boughtFurniture = this.furnituresForSale.get(buyableID);
-            if(gotchi.getCoins() < boughtFurniture.getCost()){
+            int furnitureCost = boughtFurniture.getCost();
+            if(gotchi.getCoins() < furnitureCost){
                 System.out.println("You do not have enough money! You require : " + boughtFurniture.getName() + " coins");
                 return;
             }
             //Let's do the transaction.
-            gotchi.decreaseMoney(boughtFurniture.getCost());
+            gotchi.decreaseMoney(furnitureCost);
             gotchi.getHome().addFurniture(boughtFurniture);
-            System.out.println("Congratulations you just bought : " + boughtFurniture.getName() + " for : " + boughtFurniture.getCost() + " coins. You now have: " + gotchi.getCoins());
+            System.out.println("Congratulations you just bought : " + boughtFurniture.getName() + " for : " + furnitureCost + " coins. You now have: " + gotchi.getCoins());
         }
     }
 
