@@ -2,7 +2,9 @@ package com.supergotchi.moneySystem;
 
 import com.supergotchi.core.Gotchi;
 import com.supergotchi.furnitures.Bed;
+import com.supergotchi.furnitures.Fridge;
 import com.supergotchi.furnitures.Furniture;
+import com.supergotchi.furnitures.Toilet;
 
 import java.util.ArrayList;
 
@@ -34,10 +36,25 @@ public class FurnitureShop implements Shop {
 
     @Override
     public void fillBuyableList() {
+        //Bedroom
         this.furnituresForSale.add(new Bed("Cheap bed",1000,30));
         this.furnituresForSale.add(new Bed("Comfy bed",3000,50));
         this.furnituresForSale.add(new Bed("Great bed",5000,70));
         this.furnituresForSale.add(new Bed("Royal bed",10000,100));
+        //Kitchen
+        this.furnituresForSale.add(new Fridge("Cheap fridge",1000,30));
+        this.furnituresForSale.add(new Fridge("Good  fridge",3000,50));
+        this.furnituresForSale.add(new Fridge("Great fridge",5000,70));
+        this.furnituresForSale.add(new Fridge("Royal fridge",10000,100));
+        //Bathroom
+        //TODO: The modifier should be always the same, but how is a toilet better than another one really?
+        this.furnituresForSale.add(new Toilet("Cheap toilet",1000,100));
+        this.furnituresForSale.add(new Toilet("Good  toilet",3000,100));
+        this.furnituresForSale.add(new Toilet("Great toilet",5000,100));
+        this.furnituresForSale.add(new Toilet("Royal toilet",10000,100));
+
+
+
     }
 
     @Override

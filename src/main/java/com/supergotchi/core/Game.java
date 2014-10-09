@@ -33,14 +33,14 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!command.equalsIgnoreCase("exit")){
-            System.out.println("Insert a command: list , interact, stats, save, shop . ");
+            System.out.println("Insert a command: list , interact, stats, save, shops , buy . ");
             command = scanner.nextLine();
             if(command.startsWith("inter")) handleInteraction(scanner);
             else if(command.startsWith("list")) handleList(scanner);
             else if(command.startsWith("exit")) handleExit();
             else if(command.startsWith("stats")) handleStats();
             else if(command.startsWith("save")) SaveLoadUtilities.saveGotchi(this.gotchi);
-            else if(command.startsWith("shops")) handleShop();
+            else if(command.startsWith("shop")) handleShop();
             else if(command.startsWith("buy")) handleBuy(command);
             else{
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");
@@ -55,7 +55,7 @@ public class Game {
      */
     public void handleInteraction(Scanner scanner){
         System.out.println("Insert the ID of the furnitures you want to interact with:");
-        //TODO: Input santization.
+        //TODO: Use regex like in handlebuy method.
         int furnitureID = scanner.nextInt();
         gotchi.getHome().getFurniture(furnitureID).interact(gotchi);
 
