@@ -35,4 +35,8 @@ public class House {
     public void addFurniture(Furniture boughtFurniture) {
         this.furnitures.add(boughtFurniture);
     }
+
+    public int getFurnitureNumber(){
+        return furnitures.size();
+    }
 }

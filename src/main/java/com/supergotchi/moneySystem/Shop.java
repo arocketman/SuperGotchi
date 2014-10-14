@@ -15,5 +15,6 @@ public interface Shop {
     public void buy(int buyableID , Gotchi gotchi);
     public void printBuyablesList();
     public void welcomeString();
+    public int getItemsNumber();
 
 }

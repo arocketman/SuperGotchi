@@ -3,6 +3,7 @@ package com.supergotchi.core;
 
 import com.supergotchi.moneySystem.Shops;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.regex.Matcher;
@@ -35,7 +36,7 @@ public class Game {
         while(!command.equalsIgnoreCase("exit")){
             System.out.println("Insert a command: list , interact, stats, save, shops , buy . ");
             command = scanner.nextLine();
-            if(command.startsWith("inter")) handleInteraction(scanner);
+            if(command.startsWith("inter")) handleInteraction(command);
             else if(command.startsWith("list")) handleList(scanner);
             else if(command.startsWith("exit")) handleExit();
             else if(command.startsWith("stats")) handleStats();
@@ -50,15 +51,19 @@ public class Game {
 
     /**
      * Handles interaction with furniture , calls the interact method of the selected furniture.
+     * Syntax "interact ITEMID"
      * TODO: extend this command to other objects around gotchi's world as well (not only furniture).
-     * @param scanner
+     * @param command
      */
-    public void handleInteraction(Scanner scanner){
-        System.out.println("Insert the ID of the furnitures you want to interact with:");
-        //TODO: Use regex like in handlebuy method.
-        int furnitureID = scanner.nextInt();
-        gotchi.getHome().getFurniture(furnitureID).interact(gotchi);
-
+    public void handleInteraction(String command){
+        ArrayList<Integer> results = Utils.getInputParameters(command);
+        if(results.isEmpty()) System.out.println("Invalid syntax . Valid syntax is : 'inter ITEMID' ex: inter 2");
+        else{
+            int itemID = results.get(0);
+            if(Utils.isValidInteraction(itemID,gotchi)) gotchi.getHome().getFurniture(itemID).interact(gotchi);
+            else
+                System.out.println("The IDs you provided are invalid!");
+        }
     }
 
     /**
@@ -100,22 +105,16 @@ public class Game {
     /**
      * Takes care of buying a furniture. If both the syntax is correct calls onto the buy method of the shop.
      * @param command regex with syntax "buy SHOPID ITEMID"
-     * TODO: Fix array out of bounds.
      */
     private void handleBuy(String command) {
-        String re1="(Buy)(\\s+)(\\d+).*?(\\d+)";	// Regex "buy int1 int2
-
-        Pattern p = Pattern.compile(re1,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-        Matcher m = p.matcher(command);
-
-        if (!m.find()){
-            System.out.println("Correct syntax : buy SHOPID ITEMID ");
-        }
-        else
-        {
-            int shopID=Integer.valueOf(m.group(3));
-            int itemID=Integer.valueOf(m.group(4));
-            Shops.getShop(shopID).buy(itemID,gotchi);
+        ArrayList<Integer> results = Utils.getInputParameters(command);
+        if(results.isEmpty()) System.out.println("Invalid syntax . Valid syntax is : 'buy SHOPID ITEMID' ex: buy 0 1");
+        else{
+            int shopID = results.get(0);
+            int itemID = results.get(1);
+            if(Utils.validBuyOperation(shopID,itemID))Shops.getShop(shopID).buy(itemID,gotchi);
+            else
+                System.out.println("The IDs you provided are invalid!");
         }
     }
 

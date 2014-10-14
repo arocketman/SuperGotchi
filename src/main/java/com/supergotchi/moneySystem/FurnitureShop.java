@@ -67,13 +67,13 @@ public class FurnitureShop implements Shop {
             Furniture boughtFurniture = this.furnituresForSale.get(buyableID);
             int furnitureCost = boughtFurniture.getCost();
             if(gotchi.getCoins() < furnitureCost){
-                System.out.println("You do not have enough money! You require : " + boughtFurniture.getName() + " coins");
+                System.out.println("You do not have enough money! You require : " + boughtFurniture.getCost() + " coins");
                 return;
             }
             //Let's do the transaction.
             gotchi.decreaseMoney(furnitureCost);
             gotchi.getHome().addFurniture(boughtFurniture);
-            System.out.println("Congratulations you just bought : " + boughtFurniture.getName() + " for : " + furnitureCost + " coins. You now have: " + gotchi.getCoins());
+            System.out.println("Congratulations you just bought : " + boughtFurniture.getName() + " for : " + furnitureCost + " coins. You now have: " + gotchi.getCoins() + " coins");
         }
     }
 
@@ -88,6 +88,11 @@ public class FurnitureShop implements Shop {
     public void welcomeString() {
         System.out.println("Welcome to : " + name.toString() + " , we have the very best furniture in GotchiTown. Here are our merchandise: ");
         printBuyablesList();
+    }
+
+    @Override
+    public int getItemsNumber() {
+        return this.furnituresForSale.size();
     }
 
 

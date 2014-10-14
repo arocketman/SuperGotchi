@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Andrea on 08/10/2014.
  */
 public class Shops {
-    static ArrayList<Shop> shops = new ArrayList<Shop>();
+    private static ArrayList<Shop> shops = new ArrayList<Shop>();
 
     public static void initializeShops(){
         shops.add(new FurnitureShop("Akim's furniture"));
@@ -22,5 +22,9 @@ public class Shops {
 
     public static Shop getShop(int ID){
         return shops.get(ID);
+    }
+
+    public static int getShopNumbers(){
+        return shops.size();
     }
 }
