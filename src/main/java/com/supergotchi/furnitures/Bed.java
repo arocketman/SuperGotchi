@@ -2,10 +2,6 @@ package com.supergotchi.furnitures;
 
 import com.supergotchi.core.Gotchi;
 
-/**
- * Created by Andrea Capuano on 04/10/2014.
- */
-
 public class Bed extends Furniture {
 
     public Bed(String name, int cost, int modifier) {
@@ -22,6 +18,7 @@ public class Bed extends Furniture {
         return "Why bother, you are not sleepy!";
     }
 
+    //TODO: When sleeping, the gotchi should be unusable. The better the bed the shorter this time period is.
     @Override
     public void interact(Gotchi gotchi) {
         super.interact(gotchi);

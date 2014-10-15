@@ -13,6 +13,7 @@ public class StatsChanger extends TimerTask{
     Gotchi gotchi;
     public final static int CRITICAL_VALUE = 10;
     public final static int BASE_MODIFIER_HAPPINESS = 10;
+    public final static int AGE_MODIFIER = 24;  //1 day older every 24 hours
 
     public StatsChanger(Gotchi gotchi) {
         this.gotchi = gotchi;

@@ -85,6 +85,7 @@ public class Game {
 
     /**
      * Takes care of printing the shops and handling the interaction with these ones.
+     * //TODO: Handle input correctly
      */
     public void handleShop(){
         Shops.printShops();
@@ -98,7 +99,7 @@ public class Game {
      * Prints the stats of the gotchi as well as the name and coins.
      */
     public void handleStats(){
-        System.out.println("[Name : ] " + gotchi.getName() + " [Coins] " + gotchi.getCoins());
+        System.out.println("[Name]: " + gotchi.getName() + " [Coins]: " + gotchi.getCoins() + " [Age]: " + gotchi.getAge() + " hours");
         System.out.println(gotchi.getStatList());
     }
 

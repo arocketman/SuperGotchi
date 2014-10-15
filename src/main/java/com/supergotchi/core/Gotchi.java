@@ -2,6 +2,9 @@ package com.supergotchi.core;
 
 import com.supergotchi.statsTraits.*;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class Gotchi {
     //Constants
     private final static int BASE_HAPPINESS = 100;
@@ -11,7 +14,7 @@ public class Gotchi {
     private final static int SEX_FEMALE = 1;
     //Fields
     private String Name;
-    private int age;
+    private long DateOfBirth;
     private int sex;
     private Trait[] Traits;
     private Stat[] Stats;
@@ -26,6 +29,7 @@ public class Gotchi {
         happiness = BASE_HAPPINESS;
         coins = BASE_COINS;
         Home = new House();
+        DateOfBirth = System.currentTimeMillis();
     }
 
     public Stat getStat(String statName){
@@ -37,10 +41,6 @@ public class Gotchi {
 
     public String getName() {
         return Name;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public House getHome() {
@@ -94,4 +94,14 @@ public class Gotchi {
     public void decreaseMoney(int amount){
         this.coins -= amount;
     }
+
+    public long getAge(){
+        Date currentTime = new Date();
+        long duration =System.currentTimeMillis() -  this.DateOfBirth;
+        long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
+        return diffInHours;
+    }
+
+
+
 }
