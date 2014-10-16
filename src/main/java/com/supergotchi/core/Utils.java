@@ -51,6 +51,15 @@ public class Utils {
             }
 
         }
+        else if(command.startsWith("travel")){
+            regex="(Travel)(\\s+)(\\d+).*?";	// Regex "travel int1"
+            Pattern p = Pattern.compile(regex,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+            Matcher m = p.matcher(command);
+            if (m.find()){
+                int itemID=Integer.valueOf(m.group(3));
+                results.add(itemID);
+            }
+        }
         return results;
  }
 

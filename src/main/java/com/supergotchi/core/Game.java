@@ -44,10 +44,26 @@ public class Game {
             else if(command.startsWith("save"))handleSave();
             else if(command.startsWith("shop")) handleShop();
             else if(command.startsWith("buy")) handleBuy(command);
+            else if(command.startsWith("travel")) handleTravel(command);
             else{
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");
             }
         }
+    }
+
+    private void handleTravel(String command) {
+        ArrayList<Integer> results = Utils.getInputParameters(command);
+        if(results.isEmpty()){
+            System.out.println("Invalid syntax . Valid syntax is : 'travel LOCATION' ex: travel 2");
+            Locations.printLocations();
+        }
+        else{
+            int destination = results.get(0);
+            if(destination < Locations.locations.size())
+                gotchi.setCurrentPosition(destination);
+            else System.out.println("That's not even a location mate");
+        }
+
     }
 
     private void handleSave() {
@@ -67,7 +83,10 @@ public class Game {
         if(results.isEmpty()) System.out.println("Invalid syntax . Valid syntax is : 'inter ITEMID' ex: inter 2");
         else{
             int itemID = results.get(0);
-            if(Utils.isValidInteraction(itemID,gotchi)) gotchi.getHome().getFurnitureByPosition(itemID).interact(gotchi);
+            if(Utils.isValidInteraction(itemID,gotchi)){
+                Locations.getLocationFromIndex(gotchi.getCurrentPosition()).getFurnitureByPosition(itemID).interact(gotchi);
+                //gotchi.getHome().getFurnitureByPosition(itemID).interact(gotchi);
+            }
             else
                 System.out.println("The IDs you provided are invalid!");
         }
@@ -78,7 +97,7 @@ public class Game {
      * @param scanner
      */
     public void handleList(Scanner scanner){
-        this.gotchi.getHome().printFurnitureList();
+        Locations.getLocationFromIndex(gotchi.getCurrentPosition()).printFurnitureList();
     }
 
     /**

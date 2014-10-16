@@ -24,6 +24,7 @@ public class Gotchi {
     private double deathChance;
     private int coins;
     private String HouseID;
+    private int currentPosition;
 
     public Gotchi(String name) {
         Name = name;
@@ -149,7 +150,11 @@ public class Gotchi {
         return diffInHours;
     }
 
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
 
-
-
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
+    }
 }
