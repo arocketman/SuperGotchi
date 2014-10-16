@@ -6,23 +6,23 @@ import com.google.gson.JsonParser;
 import com.supergotchi.statsTraits.Stat;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 /**
  * Created by Andrea on 16/10/2014.
  */
 public class SaveLoadUtils {
 
-    static String fileName = "NEW_SAVE.json";
+    static String GOTCHI_FILESAVE = "NEW_SAVE.json";
 
+    /**
+     * Loads a gotchi from the file NEW_SAVE.json
+     * @return
+     */
     public static Gotchi loadGotchi(){
         Gotchi gotchi = new Gotchi();
         JsonParser parser = new JsonParser();
         try {
-            Reader reader = new FileReader(fileName);
+            Reader reader = new FileReader(GOTCHI_FILESAVE);
             JsonObject loadedGotchiJson = parser.parse(reader).getAsJsonObject();
             //Loading properties
             gotchi.setName(loadedGotchiJson.get("Name").getAsString());
@@ -63,7 +63,7 @@ public class SaveLoadUtils {
         savedJson.addProperty("Coins",gotchi.getCoins());
         savedJson.addProperty("HouseID", gotchi.getHouseID());
         try {
-            Writer writer = new FileWriter(fileName);
+            Writer writer = new FileWriter(GOTCHI_FILESAVE);
             gson.toJson(savedJson, writer);
             writer.close();
         } catch (IOException ex) {
@@ -74,7 +74,7 @@ public class SaveLoadUtils {
     }
 
     public static boolean savedGameExists(){
-        File file = new File(fileName);
+        File file = new File(GOTCHI_FILESAVE);
         return file.exists();
     }
 

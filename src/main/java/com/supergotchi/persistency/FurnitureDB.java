@@ -1,8 +1,6 @@
 package com.supergotchi.persistency;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import com.supergotchi.core.House;
 import com.supergotchi.furnitures.Bed;
 import com.supergotchi.furnitures.Fridge;
 import com.supergotchi.furnitures.Furniture;
@@ -10,11 +8,10 @@ import com.supergotchi.furnitures.Toilet;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FurnitureDB {
     public static ArrayList<Furniture> furnitures = new ArrayList<Furniture>();
-    public static final String fileName = "furniture.json";
+    public static final String FURNITURE_FILESAVE = "furniture.json";
 
     public static Furniture getFurniture(String furnitureID){
         for(Furniture furniture : furnitures){
@@ -23,11 +20,14 @@ public class FurnitureDB {
         return null;
     }
 
+    /**
+     * Loads furniture array from the furniture.json file.
+     */
     public static void loadFurnitures(){
         JsonParser parser = new JsonParser();
         Reader reader = null;
         try {
-            reader = new FileReader(fileName);
+            reader = new FileReader(FURNITURE_FILESAVE);
             JsonArray arrayOfFurniture = parser.parse(reader).getAsJsonArray();
             for(JsonElement furniture : arrayOfFurniture){
                 JsonObject furnitureObject = furniture.getAsJsonObject();
@@ -46,6 +46,9 @@ public class FurnitureDB {
     }
 
 
+    /**
+     * This saves the furnitures onto a file. This is supposed to be used just the one time. //TODO: Probably needs a better solution
+     */
     public static void saveFurnitures(){
         furnitureDB();
         JsonArray furnituresJson = new JsonArray();
@@ -61,7 +64,7 @@ public class FurnitureDB {
         }
         Gson gson = new Gson();
         try {
-            Writer writer = new FileWriter(fileName);
+            Writer writer = new FileWriter(FURNITURE_FILESAVE);
             gson.toJson(furnituresJson, writer);
             writer.close();
         } catch (IOException ex) {
@@ -69,6 +72,9 @@ public class FurnitureDB {
         }
     }
 
+    /**
+     * Just holds the furniture, used only when saving. TEST DATA. //TODO: Needs to be deleted and replaced with a single furniture adding method.
+     */
     public static void furnitureDB(){
         //Bedroom
         furnitures.add(new Bed("Cheap bed",1000,30));
@@ -88,6 +94,11 @@ public class FurnitureDB {
         furnitures.add(new Toilet("Royal toilet",10000,100));
     }
 
+    /**
+     * Used to get a child of Furniture (ex: Bed, Fridge) from the JsonFile.
+     * @param object the json Object to get the stuff with.
+     * @return the furniture.
+     */
     public static Furniture getFurnitureClassFromJson(JsonObject object){
         try {
             return (Furniture)Class.forName(object.get("ClassName").getAsString().replaceAll("\"","")).newInstance();

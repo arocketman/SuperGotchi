@@ -3,7 +3,6 @@ package com.supergotchi.persistency;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import com.supergotchi.core.Gotchi;
 import com.supergotchi.core.House;
 
 import java.io.*;
@@ -12,9 +11,7 @@ import java.util.List;
 
 public class Locations {
     public static ArrayList<House> locations = new ArrayList<House>();
-    public static String fileName = "LOCATIONS.json";
-
-
+    public static String LOCATIONS_FILESAVE = "LOCATIONS.json";
 
     public static House getHouse(String houseID){
         for(House house : locations){
@@ -23,11 +20,14 @@ public class Locations {
         return null;
     }
 
+    /**
+     * Loads the locations from the file locations
+     */
     public static void loadLocations(){
         JsonParser parser = new JsonParser();
         Reader reader = null;
         try {
-            reader = new FileReader(fileName);
+            reader = new FileReader(LOCATIONS_FILESAVE);
             JsonArray arrayOfLocations = parser.parse(reader).getAsJsonArray();
             for(JsonElement location : arrayOfLocations){
                 House house = new House();
@@ -47,6 +47,9 @@ public class Locations {
 
     }
 
+    /**
+     * Saves the locations arraylist in the filename
+     */
     public static void saveLocations(){
         JsonArray locationsJson = new JsonArray();
         for(House house : locations) {
@@ -67,7 +70,7 @@ public class Locations {
         }
         Gson gson = new Gson();
         try {
-            Writer writer = new FileWriter(fileName);
+            Writer writer = new FileWriter(LOCATIONS_FILESAVE);
             gson.toJson(locationsJson, writer);
             writer.close();
         } catch (IOException ex) {

@@ -53,6 +53,7 @@ public class Game {
     private void handleSave() {
         SaveLoadUtils.save(gotchi);
         Locations.saveLocations();
+        System.out.println("Game saved.");
     }
 
     /**
@@ -86,7 +87,7 @@ public class Game {
     public void handleExit(){
         System.out.println("Have a good one.");
         //Save on exit
-        SaveLoadUtilities.saveGotchi(gotchi);
+        handleSave();
     }
 
     /**
