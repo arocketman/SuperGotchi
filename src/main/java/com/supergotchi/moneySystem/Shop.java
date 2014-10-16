@@ -16,5 +16,4 @@ public interface Shop {
     public void printBuyablesList();
     public void welcomeString();
     public int getItemsNumber();
-
 }

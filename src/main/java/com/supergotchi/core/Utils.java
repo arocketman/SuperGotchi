@@ -1,6 +1,7 @@
 package com.supergotchi.core;
 
 import com.supergotchi.moneySystem.Shops;
+import com.supergotchi.persistency.Locations;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -60,11 +61,20 @@ public class Utils {
                 results.add(itemID);
             }
         }
+        else if(command.startsWith("shop")){
+            regex="(Shop)(\\s+)(\\d+).*?";	// Regex "travel int1"
+            Pattern p = Pattern.compile(regex,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+            Matcher m = p.matcher(command);
+            if (m.find()){
+                int itemID=Integer.valueOf(m.group(3));
+                results.add(itemID);
+            }
+        }
         return results;
  }
 
-    public static boolean isValidInteraction(int itemID , Gotchi g){
-        return g.getHome().getFurnitureNumber() > itemID;
+    public static boolean isValidInteraction(int itemID , int houseID){
+        return Locations.getLocationFromIndex(houseID).getFurnitureNumber() > itemID;
     }
 }
 

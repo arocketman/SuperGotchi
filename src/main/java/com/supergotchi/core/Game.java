@@ -42,7 +42,7 @@ public class Game {
             else if(command.startsWith("exit")) handleExit();
             else if(command.startsWith("stats")) handleStats();
             else if(command.startsWith("save"))handleSave();
-            else if(command.startsWith("shop")) handleShop();
+            else if(command.startsWith("shop")) handleShop(command);
             else if(command.startsWith("buy")) handleBuy(command);
             else if(command.startsWith("travel")) handleTravel(command);
             else{
@@ -83,7 +83,7 @@ public class Game {
         if(results.isEmpty()) System.out.println("Invalid syntax . Valid syntax is : 'inter ITEMID' ex: inter 2");
         else{
             int itemID = results.get(0);
-            if(Utils.isValidInteraction(itemID,gotchi)){
+            if(Utils.isValidInteraction(itemID,gotchi.getCurrentPosition())){
                 Locations.getLocationFromIndex(gotchi.getCurrentPosition()).getFurnitureByPosition(itemID).interact(gotchi);
                 //gotchi.getHome().getFurnitureByPosition(itemID).interact(gotchi);
             }
@@ -113,12 +113,19 @@ public class Game {
      * Takes care of printing the shops and handling the interaction with these ones.
      * //TODO: Handle input correctly
      */
-    public void handleShop(){
-        Shops.printShops();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Insert the ID of the shop you'd like to visit: ");
-        int choice = scanner.nextInt();
-        Shops.getShop(choice).welcomeString();
+    public void handleShop(String command){
+        ArrayList<Integer> results = Utils.getInputParameters(command);
+        if(results.isEmpty()){
+            System.out.println("Invalid syntax . Valid syntax is : 'shop SHOPID' ex: shop 1");
+            Shops.printShops();
+        }
+        else{
+            int shopID = results.get(0);
+            if(shopID < Shops.getShopNumbers())
+                Shops.getShop(shopID).welcomeString();
+            else
+                System.out.println("The IDs you provided are invalid!");
+        }
     }
 
     /**

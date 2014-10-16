@@ -8,6 +8,7 @@ import com.supergotchi.persistency.Locations;
 public class Main {
     public static void main(String[] args) {
         Game game;
+        //TODO: Fix files don't exist.
         FurnitureDB.loadFurnitures();
         Locations.loadLocations();
         if(SaveLoadUtils.savedGameExists()) game = new Game(SaveLoadUtils.loadGotchi());
