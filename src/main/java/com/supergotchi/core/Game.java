@@ -2,6 +2,7 @@ package com.supergotchi.core;
 
 
 import com.supergotchi.moneySystem.Shops;
+import com.supergotchi.persistency.Locations;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,13 +41,18 @@ public class Game {
             else if(command.startsWith("list")) handleList(scanner);
             else if(command.startsWith("exit")) handleExit();
             else if(command.startsWith("stats")) handleStats();
-            else if(command.startsWith("save")) SaveLoadUtilities.saveGotchi(this.gotchi);
+            else if(command.startsWith("save"))handleSave();
             else if(command.startsWith("shop")) handleShop();
             else if(command.startsWith("buy")) handleBuy(command);
             else{
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");
             }
         }
+    }
+
+    private void handleSave() {
+        SaveLoadUtils.save(gotchi);
+        Locations.saveLocations();
     }
 
     /**
@@ -60,7 +66,7 @@ public class Game {
         if(results.isEmpty()) System.out.println("Invalid syntax . Valid syntax is : 'inter ITEMID' ex: inter 2");
         else{
             int itemID = results.get(0);
-            if(Utils.isValidInteraction(itemID,gotchi)) gotchi.getHome().getFurniture(itemID).interact(gotchi);
+            if(Utils.isValidInteraction(itemID,gotchi)) gotchi.getHome().getFurnitureByPosition(itemID).interact(gotchi);
             else
                 System.out.println("The IDs you provided are invalid!");
         }
@@ -92,7 +98,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the ID of the shop you'd like to visit: ");
         int choice = scanner.nextInt();
-            Shops.getShop(choice).welcomeString();
+        Shops.getShop(choice).welcomeString();
     }
 
     /**

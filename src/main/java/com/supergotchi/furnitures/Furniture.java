@@ -4,6 +4,8 @@ import com.supergotchi.core.Gotchi;
 import com.supergotchi.moneySystem.Buyable;
 import com.supergotchi.statsTraits.Stat;
 
+import java.util.UUID;
+
 /**
  * Created by Andrea Capuano on 04/10/2014.
  */
@@ -15,6 +17,7 @@ public abstract class Furniture implements Buyable {
     String ModifiedStat;
     //Type is used for deserialization purposes.
     String ClassName;
+    String furnitureID;
 
     protected Furniture(String name, int cost, int modifier, String modifiedStat) {
         Name = name;
@@ -22,6 +25,11 @@ public abstract class Furniture implements Buyable {
         Modifier = modifier;
         ModifiedStat = modifiedStat;
         ClassName = getClass().getName();
+        furnitureID = UUID.randomUUID().toString();
+    }
+
+    protected Furniture(){
+
     }
 
     /**Message when the furnitures has been used */
@@ -68,5 +76,33 @@ public abstract class Furniture implements Buyable {
         return "Name : " + Name + ", " +
                "Price : " + Cost + ", " +
                "Efficiency: " + String.valueOf(Modifier) ;
+    }
+
+    public String getID() {
+        return furnitureID;
+    }
+
+    public String getModifiedStat() {
+        return ModifiedStat;
+    }
+
+    public void setModifiedStat(String modifiedStat) {
+        ModifiedStat = modifiedStat;
+    }
+
+    public int getModifier() {
+        return Modifier;
+    }
+
+    public void setModifier(int modifier) {
+        Modifier = modifier;
+    }
+
+    public String getFurnitureID() {
+        return furnitureID;
+    }
+
+    public void setFurnitureID(String furnitureID) {
+        this.furnitureID = furnitureID;
     }
 }

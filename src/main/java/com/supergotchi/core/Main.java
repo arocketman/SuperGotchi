@@ -1,12 +1,17 @@
 package com.supergotchi.core;
 
+import com.supergotchi.furnitures.Furniture;
 import com.supergotchi.moneySystem.Shops;
+import com.supergotchi.persistency.FurnitureDB;
+import com.supergotchi.persistency.Locations;
 
 public class Main {
     public static void main(String[] args) {
         Game game;
-        if(SaveLoadUtilities.savedGameExists()) game = new Game(SaveLoadUtilities.loadGotchi());
-        else game = new Game(new Gotchi("GotchiName"));
+        FurnitureDB.loadFurnitures();
+        Locations.loadLocations();
+        if(SaveLoadUtils.savedGameExists()) game = new Game(SaveLoadUtils.loadGotchi());
+        else game = new Game(new Gotchi("Gregory"));
         Shops.initializeShops();
         game.gameLoop();
     }

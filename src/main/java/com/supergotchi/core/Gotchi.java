@@ -1,8 +1,10 @@
 package com.supergotchi.core;
 
+import com.supergotchi.persistency.Locations;
 import com.supergotchi.statsTraits.*;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Gotchi {
@@ -16,20 +18,49 @@ public class Gotchi {
     private String Name;
     private long DateOfBirth;
     private int sex;
-    private Trait[] Traits;
+    //private Trait[] Traits;
     private Stat[] Stats;
     private int happiness;
     private double deathChance;
     private int coins;
-    private House Home;
+    private String HouseID;
 
     public Gotchi(String name) {
         Name = name;
         Stats = new Stat[]{new Energy(), new Satiation(), new Bladder()};
         happiness = BASE_HAPPINESS;
         coins = BASE_COINS;
-        Home = new House();
         DateOfBirth = System.currentTimeMillis();
+        HouseID = UUID.randomUUID().toString();
+        House house = new House();
+        house.setID(HouseID);
+        Locations.locations.add(house);
+        Locations.saveLocations();
+    }
+
+    public Gotchi(){
+        Stats = new Stat[]{new Energy(), new Satiation(), new Bladder()};
+        happiness = BASE_HAPPINESS;
+        coins = BASE_COINS;
+        DateOfBirth = System.currentTimeMillis();
+        HouseID = UUID.randomUUID().toString();
+
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public House getHome(){
+        return Locations.getHouse(this.HouseID);
+    }
+
+    public String getHouseID() {
+        return HouseID;
+    }
+
+    public void setHouseID(String houseID) {
+        HouseID = houseID;
     }
 
     public Stat getStat(String statName){
@@ -39,12 +70,20 @@ public class Gotchi {
         return null;
     }
 
-    public String getName() {
-        return Name;
+    public long getDateOfBirth() {
+        return DateOfBirth;
     }
 
-    public House getHome() {
-        return Home;
+    public void setDateOfBirth(long dateOfBirth) {
+        DateOfBirth = dateOfBirth;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getName() {
+        return Name;
     }
 
     public int getCoins() {
@@ -79,6 +118,14 @@ public class Gotchi {
         }
     }
 
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     public boolean isUnhappy(){
         return this.happiness <= UNHAPPINESS_VALUE;
     }
@@ -101,6 +148,7 @@ public class Gotchi {
         long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
         return diffInHours;
     }
+
 
 
 

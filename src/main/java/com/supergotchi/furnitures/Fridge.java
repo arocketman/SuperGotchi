@@ -20,6 +20,8 @@ public class Fridge extends Furniture {
         return "You open up the fridge, look around for something you get " + foodList[(new Random()).nextInt(foodList.length)] + " , your tummy feels relieved already!";
     }
 
+    public Fridge(){}
+
     @Override
     public String cantUseThisMessage() {
         return "You are not even hungry..";

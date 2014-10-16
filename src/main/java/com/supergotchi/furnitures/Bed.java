@@ -8,6 +8,8 @@ public class Bed extends Furniture {
         super(name, cost, modifier, "energy");
     }
 
+    public Bed(){}
+
     @Override
     public String usedMessage() {
         return "You lay down onto the bed and quickly fall asleep. ZzzZzzZzz";
