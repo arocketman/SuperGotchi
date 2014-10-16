@@ -92,7 +92,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the ID of the shop you'd like to visit: ");
         int choice = scanner.nextInt();
-        Shops.getShop(choice).welcomeString();
+            Shops.getShop(choice).welcomeString();
     }
 
     /**
