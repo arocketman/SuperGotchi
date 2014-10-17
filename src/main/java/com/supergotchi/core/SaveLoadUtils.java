@@ -8,7 +8,7 @@ import com.supergotchi.statsTraits.Stat;
 import java.io.*;
 
 /**
- * Created by Andrea on 16/10/2014.
+ * Handles the save and load of the gotchi.
  */
 public class SaveLoadUtils {
 

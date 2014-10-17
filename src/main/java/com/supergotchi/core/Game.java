@@ -10,6 +10,9 @@ import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Game class, handles the gaming loop. Takes the input from the user and if it's a valid command it calls the command handler.
+ */
 public class Game {
     public static final int STATS_CHANGER_CALLED_EACH_SECONDS = 60;
 
@@ -51,6 +54,10 @@ public class Game {
         }
     }
 
+    /**
+     * Changes the current position of the Gotchi to the one specified by the user.
+     * @param command
+     */
     private void handleTravel(String command) {
         ArrayList<Integer> results = Utils.getInputParameters(command);
         if(results.isEmpty()){
@@ -66,6 +73,9 @@ public class Game {
 
     }
 
+    /**
+     * Saves the game, both the gotchi and the locations.
+     */
     private void handleSave() {
         SaveLoadUtils.save(gotchi);
         Locations.saveLocations();

@@ -8,6 +8,9 @@ import com.supergotchi.persistency.FurnitureDB;
 
 import java.util.ArrayList;
 
+/**
+ * House class. A house has multiple furniture and a base value. The value grows with the furniture inside.
+ */
 public class House {
     private final static int HOUSE_BASEVALUE = 5000;
 

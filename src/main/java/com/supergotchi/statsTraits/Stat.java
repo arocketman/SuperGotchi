@@ -3,7 +3,7 @@ package com.supergotchi.statsTraits;
 import com.supergotchi.core.Gotchi;
 
 /**
- * Created by Andrea on 04/10/2014.
+ * Abstract class for a Stat. Each specific stat (Energy, Hunger) inherits from this one.
  */
 public abstract class Stat {
     //The default starting value for the particular stat.

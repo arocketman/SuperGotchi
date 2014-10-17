@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Gotchi class representing the gotchi itself.
+ */
 public class Gotchi {
     //Constants
     private final static int BASE_HAPPINESS = 100;

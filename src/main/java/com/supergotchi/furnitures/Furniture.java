@@ -7,7 +7,7 @@ import com.supergotchi.statsTraits.Stat;
 import java.util.UUID;
 
 /**
- * Created by Andrea Capuano on 04/10/2014.
+ * Abstract class represeting a furniture. Each furniture (Like bed, fridge etc) inherits from this one.
  */
 public abstract class Furniture implements Buyable {
     //Fields
