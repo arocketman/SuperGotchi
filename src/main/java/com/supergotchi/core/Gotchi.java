@@ -21,10 +21,10 @@ public class Gotchi {
     private String Name;
     private long DateOfBirth;
     private int sex;
+    private boolean Alive;
     //private Trait[] Traits;
     private Stat[] Stats;
     private int happiness;
-    private double deathChance;
     private int coins;
     private String HouseID;
     private int currentPosition;
@@ -36,6 +36,8 @@ public class Gotchi {
         coins = BASE_COINS;
         DateOfBirth = System.currentTimeMillis();
         HouseID = UUID.randomUUID().toString();
+        Alive = true;
+        this.setCurrentPosition(Locations.getIndexFromID(HouseID));
         House house = new House();
         house.setID(HouseID);
         Locations.locations.add(house);
@@ -48,7 +50,15 @@ public class Gotchi {
         coins = BASE_COINS;
         DateOfBirth = System.currentTimeMillis();
         HouseID = UUID.randomUUID().toString();
+        Alive = true;
+    }
 
+    public boolean isAlive() {
+        return Alive;
+    }
+
+    public void setAlive(boolean alive) {
+        Alive = alive;
     }
 
     public void setSex(int sex) {
@@ -72,6 +82,21 @@ public class Gotchi {
             if(s.getName().equalsIgnoreCase(statName)) return s;
         }
         return null;
+    }
+
+    /**
+     * Calculates if the gotchi dies based on the current deathChance which is the sum of the chances of the stats that are currently 0 valued.
+     * @return if the gotchi is alive or dead
+     */
+    public boolean randomDeath(){
+        double deathChance = 0;
+        for(Stat stat : Stats){
+            if(stat.getValue() == 0){
+                deathChance += stat.getDeathChanceModifier();
+            }
+        }
+        if(Math.random() < deathChance) this.Alive = false;
+        return this.Alive;
     }
 
     public long getDateOfBirth() {
@@ -104,14 +129,6 @@ public class Gotchi {
 
     public Stat[] getStats() {
         return Stats;
-    }
-
-    public double getDeathChance() {
-        return deathChance;
-    }
-
-    public void setDeathChance(double deathChance) {
-        this.deathChance = deathChance;
     }
 
     public void decreaseHappiness(int i){

@@ -8,7 +8,7 @@ import com.supergotchi.core.Gotchi;
 public class Energy extends Stat {
 
     public Energy() {
-        super("Energy", Stat.startingValue, 0.2, 0.3);
+        super("Energy", Stat.startingValue, 0.2, 0.2);
     }
 
     @Override

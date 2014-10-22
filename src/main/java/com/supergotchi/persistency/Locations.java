@@ -82,11 +82,18 @@ public class Locations {
     public static void printLocations(){
         int counter = 0;
         for(House l : locations){
-            System.out.println(counter++ + " ) "+ l.getID());
+            System.out.println(counter++ + " ) "+ "House ID: " +l.getID());
         }
     }
 
     public static House getLocationFromIndex(int index){
         return locations.get(index);
+    }
+
+    public static int getIndexFromID(String string){
+        for(int i = 0; i < locations.size(); i++){
+            if(locations.get(i).getID().equalsIgnoreCase(string)) return i;
+        }
+        return 0;
     }
 }

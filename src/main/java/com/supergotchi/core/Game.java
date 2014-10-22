@@ -37,8 +37,8 @@ public class Game {
     public void gameLoop(){
         Scanner scanner = new Scanner(System.in);
         String command = "";
-        while(!command.equalsIgnoreCase("exit")){
-            System.out.println("Insert a command: list , interact, stats, save, shops , buy . ");
+        while(!command.equalsIgnoreCase("exit") && gotchi.isAlive()){
+            System.out.println("Insert a command: list , interact, stats, save, shops , buy , travel. ");
             command = scanner.nextLine();
             if(command.startsWith("inter")) handleInteraction(command);
             else if(command.startsWith("list")) handleList(scanner);
@@ -52,6 +52,7 @@ public class Game {
                 System.out.println("Unknown command : " + command + " . Type : 'exit' to quit");
             }
         }
+        if(!gotchi.isAlive()) System.out.println("Your gotchi died.. RIP");
     }
 
     /**

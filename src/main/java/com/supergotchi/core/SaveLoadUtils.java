@@ -3,6 +3,7 @@ package com.supergotchi.core;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.supergotchi.persistency.Locations;
 import com.supergotchi.statsTraits.Stat;
 
 import java.io.*;
@@ -12,17 +13,17 @@ import java.io.*;
  */
 public class SaveLoadUtils {
 
-    static String GOTCHI_FILESAVE = "NEW_SAVE.json";
+    static String GOTCHI_PROFILES_FOLDER = new File("").getAbsolutePath() + "//profiles//";
 
     /**
      * Loads a gotchi from the file NEW_SAVE.json
      * @return
      */
-    public static Gotchi loadGotchi(){
+    public static Gotchi loadGotchi(String ID){
         Gotchi gotchi = new Gotchi();
         JsonParser parser = new JsonParser();
         try {
-            Reader reader = new FileReader(GOTCHI_FILESAVE);
+            Reader reader = new FileReader(GOTCHI_PROFILES_FOLDER + ID + ".json");
             JsonObject loadedGotchiJson = parser.parse(reader).getAsJsonObject();
             //Loading properties
             gotchi.setName(loadedGotchiJson.get("Name").getAsString());
@@ -35,9 +36,10 @@ public class SaveLoadUtils {
             }
             //Loading other fields
             gotchi.setHappiness(loadedGotchiJson.get("Happiness").getAsInt());
-            gotchi.setDeathChance(loadedGotchiJson.get("DeathChance").getAsDouble());
             gotchi.setCoins(loadedGotchiJson.get("Coins").getAsInt());
             gotchi.setHouseID(loadedGotchiJson.get("HouseID").getAsString());
+            gotchi.setCurrentPosition(Locations.getIndexFromID(gotchi.getHouseID()));
+            gotchi.setAlive(loadedGotchiJson.get("Alive").getAsBoolean());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -59,11 +61,11 @@ public class SaveLoadUtils {
         }
         //Back to the other fields
         savedJson.addProperty("Happiness",gotchi.getHappiness());
-        savedJson.addProperty("DeathChance",gotchi.getDeathChance());
         savedJson.addProperty("Coins",gotchi.getCoins());
         savedJson.addProperty("HouseID", gotchi.getHouseID());
+        savedJson.addProperty("Alive",gotchi.isAlive());
         try {
-            Writer writer = new FileWriter(GOTCHI_FILESAVE);
+            Writer writer = new FileWriter(GOTCHI_PROFILES_FOLDER + gotchi.getName() + ".json");
             gson.toJson(savedJson, writer);
             writer.close();
         } catch (IOException ex) {
@@ -73,8 +75,8 @@ public class SaveLoadUtils {
 
     }
 
-    public static boolean savedGameExists(){
-        File file = new File(GOTCHI_FILESAVE);
+    public static boolean savedGameExists(String gotchiName){
+        File file = new File(GOTCHI_PROFILES_FOLDER + gotchiName + ".json");
         return file.exists();
     }
 

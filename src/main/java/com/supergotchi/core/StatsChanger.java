@@ -32,5 +32,6 @@ public class StatsChanger extends TimerTask{
                 System.out.println(stat.notifyMessage());
             }
         }
+        gotchi.randomDeath();
     }
 }
